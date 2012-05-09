@@ -29,11 +29,11 @@ else
   server_fqdn = node['fqdn']
 end
 
-node.set['wordpress']['db']['password'] = secure_password
-node.set['wordpress']['keys']['auth'] = secure_password
-node.set['wordpress']['keys']['secure_auth'] = secure_password
-node.set['wordpress']['keys']['logged_in'] = secure_password
-node.set['wordpress']['keys']['nonce'] = secure_password
+node.set_unless['wordpress']['db']['password'] = secure_password
+node.set_unless['wordpress']['keys']['auth'] = secure_password
+node.set_unless['wordpress']['keys']['secure_auth'] = secure_password
+node.set_unless['wordpress']['keys']['logged_in'] = secure_password
+node.set_unless['wordpress']['keys']['nonce'] = secure_password
 
 remote_file "#{Chef::Config[:file_cache_path]}/wordpress-#{node['wordpress']['version']}.tar.gz" do
   checksum node['wordpress']['checksum']
